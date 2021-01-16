@@ -11,18 +11,20 @@ class Input extends Component
     public $type;
     public $defaultValue;
     public $customAttribute;
+    public $isStack;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($globalAttribute, $label=false, $type="text", $defaultValue, $customAttribute="")
+    public function __construct($globalAttribute, $label=false, $type="text", $defaultValue, $customAttribute="", $isStack=false)
     {
         $this->globalAttribute = $globalAttribute;
         $this->label = $label;
         $this->type = $type;
         $this->defaultValue = $defaultValue;
         $this->customAttribute = $customAttribute;
+        $this->isStack = $isStack;
     }
 
     /**

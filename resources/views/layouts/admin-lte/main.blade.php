@@ -34,9 +34,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
     }
     .select2-container--default.select2-container--focus .select2-selection--single{
       border:1px solid #ced4da;
+      max-height: calc(2.25rem + 2px) !important;
     }
     .select2-container--default .select2-container--below .select2-container--focus{
       border:1px solid #ced4da;
+      max-height: calc(2.25rem + 2px) !important;
+    }
+    .select2-container--default .select2-selection--single {
+      max-height: calc(2.25rem + 2px) !important;
     }
   </style>
   @yield('style')

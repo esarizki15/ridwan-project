@@ -8,16 +8,18 @@ class Select extends Component
 {
     public $globalAttribute;
     public $label;
+    public $isStack;
     public $customAttribute;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($globalAttribute, $label,$customAttribute="")
+    public function __construct($globalAttribute, $label, $isStack=false ,$customAttribute="")
     {
         $this->globalAttribute = $globalAttribute;
         $this->label = $label;
+        $this->isStack = $isStack;
         $this->customAttribute = $customAttribute;
     }
 
