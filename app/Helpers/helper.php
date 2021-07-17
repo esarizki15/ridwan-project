@@ -6,7 +6,19 @@ use GuzzleHttp\Exception\RequestException;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Storage;
 use \Carbon\Carbon;
+function createDate($date, $locale = 'id')
+{
+    try {
+        return Carbon::parse($date)->locale($locale);
+    } catch (\Exception $e) {
+        return Carbon::now()->locale($locale);
+    }
+}
 
+function formatDate($date, $isoFormat = "D MMMM Y")
+{
+    return $date->isoFormat($isoFormat);
+}
 function saveFile($model, $imageFile, $attributeName, $publicDirectoryName = null, $method = null)
 {
     $isImage = getimagesize($imageFile);
