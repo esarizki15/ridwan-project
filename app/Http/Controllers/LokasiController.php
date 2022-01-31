@@ -89,9 +89,6 @@ class LokasiController extends Controller
      */
     public function update(Request $request, Lokasi $lokasi)
     {
-        $request->validate([
-            'name' => 'required|max:10'
-            ]);
         $status = 'lokasi updated!';
         $success = true;
         try{
@@ -104,10 +101,10 @@ class LokasiController extends Controller
                 $filename = md5(microtime()) . '.' . $extension;
                 $uploaded_image->move($destinationPath, $filename);
                 $lokasi->gambar = $filename;
-            }
-            if($lokasi->update()){
-                if(File::exists($destinationPath . '/' . $oldFileName)) {
-                    File::delete($destinationPath . '/' . $oldFileName);
+                if($lokasi->update()){
+                    if(File::exists($destinationPath . '/' . $oldFileName)) {
+                        File::delete($destinationPath . '/' . $oldFileName);
+                    }
                 }
             }
         }catch(\Throwable $e){

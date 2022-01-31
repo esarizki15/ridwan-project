@@ -4,7 +4,7 @@
 @endsection
 @section('breadcrumb')
 <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-<li class="breadcrumb-item"><a href="{{ route('user.index') }}">User</a></li>
+<li class="breadcrumb-item"><a href="{{ route('lokasi.index') }}">Lokasi</a></li>
 <li class="breadcrumb-item active">Edit</li>
 @endsection
 @section('content')
@@ -12,24 +12,30 @@
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="card">
-            <div class="card-header">Edit User</div>
+            <div class="card-header">Lokasi</div>
 
             <div class="card-body">
-                <form method="POST" action="{{ route('user.update', $user->id) }}">
-                    {{ method_field('PATCH') }}
+                @if (session('status'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
+                @endif
+                <form method="POST" action="{{ route('lokasi.update', $lokasi->id) }}" enctype="multipart/form-data">
+                    @method('put')
                     @csrf
-                    <x-input globalAttribute="name" label="Name" :defaultValue="$user->name" customAttribute="required disabled" />
+
+                    <x-input type="file" :defaultValue="$lokasi->gambar" :isRequired="true"
+                        globalAttribute="gambar" label="Gambar" customAttribute="accept=image/*">
+                        @include('partial.image-preview', ['imageName' => $lokasi->gambar, 'inputId'=>'gambar', 'modalId' => 'modalGambar'])
+                        <small>* Max file size 1 Mb</small>
+                    </x-input>
+
+                    <x-input globalAttribute="nama" :defaultValue="$lokasi->nama" customAttribute="required" />
                     
-                    <x-input globalAttribute="email" type="email" label="E-Mail Address" :defaultValue="$user->email" customAttribute="required disabled" />
-   
-                    <x-select globalAttribute="role_id" label="Role" customAttribute="required">
-                        @foreach ($roles as $role)
-                            <option value="{{ $role->id }}" @if($user->role_id == $role->id) selected @endif>{{ $role->name }}</option>
-                        @endforeach
-                    </x-select>
+                    <x-text-area :isTinyMce="true" globalAttribute="alamat" :defaultValue="$lokasi->alamat" />
 
-                    <x-input globalAttribute="password" type="password" label="Password" :defaultValue="old('password')" customAttribute="required" />
-
+                    <x-text-area :isTinyMce="true" globalAttribute="keterangan" :defaultValue="$lokasi->keterangan" />
+                    
                     <x-submit-button label="Update" />
                 </form>
             </div>
