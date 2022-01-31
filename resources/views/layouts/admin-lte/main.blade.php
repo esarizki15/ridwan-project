@@ -96,6 +96,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <!-- Main Footer -->
   @include('layouts.admin-lte.footer')
+  @stack('modal')
 </div>
 <!-- ./wrapper -->
 
@@ -112,7 +113,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{ asset('admin-lte/plugins/datatables/dataTables.responsive.min.js') }}"></script>
 <script src="{{ asset('js/sweetalert2.js') }}"></script>
 <script src="{{ asset('admin-lte/plugins/select2/js/select2.full.js') }}"></script>
+<script src="https://cdn.tiny.cloud/1/ozc9x14w309wc8eot0igzgly7fpfjmxtln50aaj7fi2mfrj2/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+  tinymce.init({
+    selector: '.tinymce'
+  });
+</script>
   <script>
+    function openModal(url) {
+        var modalImg = $('#img-exampleModal');
+        modalImg.attr('src', url);
+        $('#exampleModal').modal('toggle')
+    }
     $(document).ready(function() {
         $('.select-2').select2();
     });
