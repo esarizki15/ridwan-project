@@ -92,7 +92,7 @@ class LokasiController extends Controller
         $status = 'lokasi updated!';
         $success = true;
         try{
-            $oldFileName = $lokasi->foto;
+            $oldFileName = $lokasi->gambar;
             $destinationPath = public_path() . DIRECTORY_SEPARATOR . 'img';
             $lokasi->update($request->except(['gambar']));
             if ($request->hasFile('gambar')) {
@@ -125,7 +125,7 @@ class LokasiController extends Controller
         $status = 'lokasi deleted!';
         $success = true;
         try {
-            $oldFileName = $lokasi->foto;
+            $oldFileName = $lokasi->gambar;
             $destinationPath = public_path() . DIRECTORY_SEPARATOR . 'img';
             if($lokasi->delete()){
                 if(File::exists($destinationPath . '/' . $oldFileName)) {

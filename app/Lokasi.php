@@ -8,6 +8,7 @@ class Lokasi extends Model
 {
     protected $fillable = [
         'nama',
+        'koordinat',
         'alamat',
         'gambar',
         'keterangan'

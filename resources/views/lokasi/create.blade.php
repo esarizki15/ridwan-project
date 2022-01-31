@@ -10,7 +10,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="row justify-content-center">
-      <div class="col-md-8">
+      <div class="col-md-10">
         <div class="card">
             <div class="card-header">Lokasi</div>
 
@@ -30,6 +30,8 @@
                     </x-input>
 
                     <x-input globalAttribute="nama" :defaultValue="old('nama')" customAttribute="required" />
+                    
+                    <x-input globalAttribute="koordinat" :defaultValue="old('koordinat')" customAttribute="required" />
                     
                     <x-text-area :isTinyMce="true" globalAttribute="alamat" :defaultValue="old('alamat')" />
 

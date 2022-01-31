@@ -22,6 +22,7 @@
                         <tr>
                         <th scope="col">#</th>
                         <th scope="col">Nama</th>
+                        <th scope="col">Koordinat</th>
                         <th scope="col">Alamat</th>
                         <th scope="col">Keterangan</th>
                         <th scope="col">Aksi</th>
@@ -32,9 +33,9 @@
                             <tr>
                                 <td>
                                     <img src="{{ asset('img/' . $data->gambar) }}" alt="none" style="max-width: 30px;" onclick="return openModal('{{ asset('img/' . $data->gambar) }}');">
-                                    {{-- <img id="img" src="{{ asset('img/' . $data->gambar) }}" style="max-width: 30px;"> --}}
                                 </td>
                                 <td>{{ $data->nama }}</td>
+                                <td>{{ $data->koordinat }}</td>
                                 <td>{!! $data->alamat !!}</td>
                                 <td>{!! $data->keterangan !!}</td>
                                 <td>
