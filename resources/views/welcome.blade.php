@@ -8,7 +8,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
+        <link rel="stylesheet" href="{{ asset('admin-lte/dist/css/adminlte.css') }}">
         <!-- Styles -->
         <style>
             html, body {
@@ -61,40 +61,67 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+            gm-map {
+                display: block;
+                width: 100%;
+                height: 300px;
+            }
         </style>
     </head>
     <body>
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
+            <div class="top-right links">
+                @auth
+                <a href="{{ url('/home') }}">Home</a>
+                @else
+                <a href="{{ route('login') }}">Login</a>
+                @endauth
+            </div>
             @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel Template
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+            
+            <div class="container">
+                <div class="content">
+                    <h4 class="mb-5 font-weight-bold">
+                        PERANCANGAN DAN PEMBANGUNAN SISTEM INFORMASI GEOGRAFIS PEMETAAN LOKASI PENYEDIAAN JASA SERVIS PERANGKAT KOMPUTER DI WILAYAH KABUPATEN TANGERANG BERBASI WEB
+                    </h4>  
+                    <div id="map" style="height: 600px;" class="w-100 mt-5"></div>
                 </div>
             </div>
         </div>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoHZpg4l8-P_mVOppKvVwBpjaUicWtM6k"></script>
+        <script src="{{ asset('admin-lte/plugins/jquery/jquery.min.js') }}"></script>
+        <script type="text/javascript">
+            var locations = [
+              ['Bondi Beach', -33.890542, 151.274856],
+              ['Coogee Beach', -33.923036, 151.259052],
+              ['Cronulla Beach', -34.028249, 151.157507],
+              ['Manly Beach', -33.80010128657071, 151.28747820854187],
+              ['Maroubra Beach', -33.950198, 151.259302]
+            ];
+            var map = new google.maps.Map(document.getElementById('map'), {
+              zoom: 10,
+              center: new google.maps.LatLng(-33.92, 151.25),
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+            
+            var infowindow = new google.maps.InfoWindow();
+        
+            var marker, i;
+            
+            for (i = 0; i < locations.length; i++) {  
+              marker = new google.maps.Marker({
+                position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                map: map
+              });
+              
+              google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                return function() {
+                  infowindow.setContent(locations[i][0]);
+                  infowindow.open(map, marker);
+                }
+              })(marker, i));
+            }
+          </script>
     </body>
 </html>
