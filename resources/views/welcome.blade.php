@@ -92,16 +92,10 @@
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoHZpg4l8-P_mVOppKvVwBpjaUicWtM6k"></script>
         <script src="{{ asset('admin-lte/plugins/jquery/jquery.min.js') }}"></script>
         <script type="text/javascript">
-            var locations = [
-              ['Bondi Beach', -33.890542, 151.274856],
-              ['Coogee Beach', -33.923036, 151.259052],
-              ['Cronulla Beach', -34.028249, 151.157507],
-              ['Manly Beach', -33.80010128657071, 151.28747820854187],
-              ['Maroubra Beach', -33.950198, 151.259302]
-            ];
+            var locations = JSON.parse('<?= $locations; ?>');
             var map = new google.maps.Map(document.getElementById('map'), {
               zoom: 10,
-              center: new google.maps.LatLng(-33.92, 151.25),
+              center: new google.maps.LatLng(locations[0][1], locations[0][2]),
               mapTypeId: google.maps.MapTypeId.ROADMAP
             });
             
@@ -112,12 +106,19 @@
             for (i = 0; i < locations.length; i++) {  
               marker = new google.maps.Marker({
                 position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-                map: map
+                map: map,
               });
-              
+              const contentString =
+            '<div class="mx-5"><h4 id="firstHeading" class="firstHeading">'+ locations[i][0] +'</h4>' +
+            '<div id="bodyContent">' +
+            locations[i][4]
+             +
+            locations[i][5]
+            +
+            "</div></div>";
               google.maps.event.addListener(marker, 'click', (function(marker, i) {
                 return function() {
-                  infowindow.setContent(locations[i][0]);
+                  infowindow.setContent(contentString);
                   infowindow.open(map, marker);
                 }
               })(marker, i));
