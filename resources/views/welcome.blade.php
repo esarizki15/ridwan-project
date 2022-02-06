@@ -92,6 +92,11 @@
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoHZpg4l8-P_mVOppKvVwBpjaUicWtM6k"></script>
         <script src="{{ asset('admin-lte/plugins/jquery/jquery.min.js') }}"></script>
         <script type="text/javascript">
+            function openModal(url) {
+                var modalImg = $('#img-exampleModal');
+                modalImg.attr('src', url);
+                $('#exampleModal').modal('toggle')
+            }
             var locations = JSON.parse('<?= $locations; ?>');
             var map = new google.maps.Map(document.getElementById('map'), {
               zoom: 10,
@@ -110,6 +115,7 @@
               });
               const contentString =
             '<div class="mx-5"><h4 id="firstHeading" class="firstHeading">'+ locations[i][0] +'</h4>' +
+            '<img src='+ locations[i][6] +' class="mb-2" style="max-height:100px;" />'+
             '<div id="bodyContent">' +
             locations[i][4]
              +

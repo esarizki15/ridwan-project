@@ -22,6 +22,7 @@ class LokasiResource extends JsonResource
             $this->id,
             $this->alamat,
             $this->keterangan,
+            asset('img/' . $this->gambar),
         ];
     }
 }
